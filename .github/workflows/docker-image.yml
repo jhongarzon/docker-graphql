@@ -38,6 +38,7 @@ jobs:
     - name: Docker build image
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         echo "Initialize build"
         docker build -t $DOCKER_USER/docker-graphql:$NEW_VERSION .
@@ -46,6 +47,7 @@ jobs:
     - name: Docker push image
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         echo "Initialize push"
         docker push $DOCKER_USER/docker-graphql:$NEW_VERSION
